@@ -3,6 +3,8 @@ var http = require("http");
 var https = require("https");
 var url = require("url");
 
+var config = require("./config.json");
+
 function parseHeaders(str) {
   var headers = {};
 
@@ -82,7 +84,7 @@ function rewrite(body, callback) {
 
 function handleRequest(request, response) {
   readBodyBuffer(request, function(buffer) {
-    var backendRequest = http.request({ timeout: 30, method: request.method, host: "127.0.0.1", port: 80, path: "/picturemaxx/index?v2=true" }, function(backendResponse) {
+    var backendRequest = http.request({ timeout: 30, method: request.method, host: config.backend.host, port: config.backend.port, path: config.backend.path }, function(backendResponse) {
       readBodyBuffer(backendResponse, function(buffer) {
         rewrite(buffer.toString("binary"), function(rewrittenResponseBody) {
           if("content-length" in backendResponse.headers)
@@ -110,5 +112,5 @@ server.on("clientError", function(err, socket) {
   socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
 
-server.listen(8080);
+server.listen(config.port);
 
