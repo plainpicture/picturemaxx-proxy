@@ -118,7 +118,7 @@ server.on("clientError", function(err, socket) {
   socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
 
-server.listen(config.port);
+server.listen(config.port, config.bind);
 
-console.log("listening on: " + config.port);
+console.log("listening on " + config.bind + ":" + config.port);
 
