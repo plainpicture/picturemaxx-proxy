@@ -3,7 +3,7 @@ var http = require("http");
 var https = require("https");
 var url = require("url");
 
-var config = require("./config.json");
+var config = process.argv[2] ? require(process.argv[2]) : require("./config.json");
 
 function parseHeaders(str) {
   var headers = {};
@@ -119,4 +119,6 @@ server.on("clientError", function(err, socket) {
 });
 
 server.listen(config.port);
+
+console.log("listening on" + config.port);
 
