@@ -28,7 +28,7 @@ function readBodyBuffer(request, callback) {
 }
 
 function fetchEmbed(embed, callback) {
-  var embedUrl = embed.replace(/x-embed-url:\s*/, "").replace(/\s(.|\s)*/, "");
+  var embedUrl = embed.replace(/x-embed-url:\s*/i, "").replace(/\s(.|\s)*/, "");
   var headers = parseHeaders(embed);
   var scheme = embedUrl.match(/^https:/) ? https : http;
   var parsedUrl = url.parse(embedUrl);
@@ -61,7 +61,7 @@ function fetchEmbed(embed, callback) {
 }
 
 function rewrite(body, callback) {
-  var embeds = body.match(/x-embed-url:([^\n]|\n\r?[^\n])+[^\n]\r?\n\r?\n/g) || [];
+  var embeds = body.match(/x-embed-url:([^\n]|\n\r?[^\n])+[^\n]\r?\n\r?\n/gi) || [];
   var responseBody = body;
   var finished = 0;
 
