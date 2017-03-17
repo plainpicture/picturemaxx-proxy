@@ -97,10 +97,13 @@ function handleRequest(request, response) {
     });
 
     backendRequest.on("error", function(e) {
+      console.error("error");
+      console.error(e);
+
       response.end("HTTP/1.1 503 Service Unavailable\r\n\r\n");
     });
 
-    backendRequest.write(buffer.toString("binary"));
+    backendRequest.write(buffer.toString("binary"), "binary");
 
     backendRequest.end();
   });
@@ -109,6 +112,9 @@ function handleRequest(request, response) {
 var server = http.createServer(handleRequest);
 
 server.on("clientError", function(err, socket) {
+  console.error("clientError");
+  console.error(err);
+
   socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
 
