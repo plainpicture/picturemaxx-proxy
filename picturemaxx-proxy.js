@@ -120,5 +120,5 @@ server.on("clientError", function(err, socket) {
 
 server.listen(config.port);
 
-console.log("listening on" + config.port);
+console.log("listening on: " + config.port);
 
