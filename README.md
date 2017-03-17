@@ -1,11 +1,11 @@
 
 # Picturemaxx Proxy
 
-This is a tiny proxy, which intercepts picturemaxx multipart responses,
-searches for a x-embed-url header, rewrites the multipart part, ie. fetches
-and injects the data from the specified url. The x-embed-url should be first
-header line of the multipart part, but must be at least appear before the
-content-length header.
+This is a tiny proxy, which intercepts picturemaxx requests, searches within
+multipart responses for a x-embed-url header and rewrites the multipart part,
+ie.  fetches and injects the data from the specified url. The x-embed-url
+should be first header line of the multipart part, but must be at least appear
+before the content-length header.
 
 # Why?
 
